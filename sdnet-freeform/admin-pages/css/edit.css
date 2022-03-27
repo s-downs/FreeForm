@@ -1,0 +1,101 @@
+#wpcontent {
+    margin-right: 16px;
+}
+
+form.sdnet_freeform_form label {
+    margin: 0.5rem 0;
+    display: block;
+}
+form.sdnet_freeform_form p {
+    font-weight: bold;
+    font-size: 1.15rem;
+    margin: 0;
+}
+
+form.sdnet_freeform_form p.small {
+    font-size: 0.75rem;
+}
+
+form.sdnet_freeform_form p.normal {
+    font-size: 1rem;
+    font-weight: initial;
+}
+
+form.sdnet_freeform_form p.super-small {
+    font-size: 0.75rem;
+    font-weight: initial;
+}
+
+form.sdnet_freeform_form .centered {
+    text-align: center;
+}
+
+form.sdnet_freeform_form .flex {
+    display: flex;
+    gap: 1rem;
+}
+
+form.sdnet_freeform_form .flex .flex-50 {
+    flex-basis: 50%;
+}
+
+form.sdnet_freeform_form input[type=text],
+form.sdnet_freeform_form select {
+    width: 100%;
+}
+
+form.sdnet_freeform_form #save-button-container {
+    text-align: center;
+}
+
+form.sdnet_freeform_form #save-button {
+    padding: 1rem;
+    width: 50%;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui {
+    display: flex;
+    border: 1px solid lightgrey;
+    margin-bottom: 0.5rem;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_list {
+    flex-basis: 75%;
+    padding: 0.5rem 1rem;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_options {
+    flex-basis: 25%;
+    padding: 1rem;
+    border-left: 1px solid lightgrey;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_options .icon-button {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_options .icon-button svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_options .icon-button svg.half-height {
+    transform: scaleY(0.3);
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_list .component {
+    min-height: 4rem;
+    position: relative;
+    margin: 0.5rem 0;
+    border: 1px solid lightgrey;
+    padding: 0.5rem;
+}
+
+form.sdnet_freeform_form .sdnet_form_fields_ui .field_list .component .icons-right {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.75rem;
+}
