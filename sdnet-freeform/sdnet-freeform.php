@@ -103,7 +103,3 @@ function sdnet_freeform_registerposttypes () {
         'hierarchical' => false,
     ] );
 }
-
-
-
-
