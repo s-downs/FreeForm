@@ -31,27 +31,38 @@ function sdnet_freeform_shortcode ( $attr, $content ) {
     $format = json_decode( $format );
 
     foreach( $format as $field ) {
-        if ( $field->label && $field->label !== '' )
+        $label = isset($field->label) && $field->label && $field->label !== '';
+        if ( $label )
             echo '<label><div>' . sanitize_text_field( $field->label ) . '</div>';
 
 
         if ( $field->type === 'input' ) {
+            if ( $label ) echo sanitize_text_field( $field->label );
             echo '<input';
-            if ( $field->name && $field->name !== '' )
-                echo ' name="' . sanitize_text_field( $field->name ) . '"';
-            if ( isset( $field->inputType ) && $field->inputType !== '' )
-                echo ' type="' . sanitize_text_field( $field->inputType ) . '"';
+            sdnet_freeform_generic_attributes( $field );
             echo '>';
         }
         if ( $field->type === 'textarea' ) {
+            if ( $label ) echo sanitize_text_field( $field->label );
             echo '<textarea';
-            if ( $field->name && $field->name !== '' )
-                echo ' name="' . sanitize_text_field( $field->name ) . '"';
+            sdnet_freeform_generic_attributes( $field );
             echo '></textarea>';
+        }
+        if ( $field->type === 'checkbox' ) {
+            echo '<input type="checkbox"';
+            sdnet_freeform_generic_attributes( $field );
+            echo '> ';
+            if ( $label ) echo sanitize_text_field( $field->label );
+        }
+        if ( $field->type === 'radio' ) {
+            echo '<input type="radio"';
+            sdnet_freeform_generic_attributes( $field );
+            echo '> ';
+            if ( $label ) echo sanitize_text_field( $field->label );
         }
 
 
-        if ( $field->label && $field->label !== '' )
+        if ( $label )
             echo '</label>';
     }
 
@@ -68,6 +79,71 @@ function sdnet_freeform_shortcode ( $attr, $content ) {
     echo '</form>';
 
     return ob_get_clean();
+}
+
+function sdnet_freeform_generic_attributes ( $field ) {
+    // Type
+    if ( isset( $field->inputType ) && $field->inputType !== '' )
+        echo ' type="' . sanitize_text_field( $field->inputType ) . '"';
+    // Name
+    if ( isset( $field->name ) && $field->name !== '' )
+        echo ' name="' . sanitize_text_field( $field->name ) . '"';
+    // Class(es)
+    if ( isset( $field->classes ) && $field->classes !== '' ) {
+        echo ' class="';
+        if ( gettype( $field->classes ) === 'object' || gettype( $field->classes ) === 'array' ) {
+            $firstDone = false;
+            foreach ( $field->classes as $class ) {
+                echo $firstDone ? ' ' : '';
+                echo sanitize_text_field( $class );
+                $firstDone = true;
+            }
+        }
+        if ( gettype( $field->classes ) === 'string' ) {
+            echo sanitize_text_field( $field->classes );
+        }
+        echo '"';
+    }
+    // ID
+    if ( isset( $field->id ) && $field->id !== '' ) {
+        echo ' id="' . sanitize_text_field( $field->id ) . '"';
+    }
+    // Style(s)
+    if ( isset( $field->style ) && $field->style !== '' ) {
+        if ( gettype( $field->style ) === 'string' ) {
+            echo ' style="' . sanitize_text_field( $field->style ) . '"';
+        }
+        if ( gettype( $field->style ) === 'object' || gettype( $field->style ) === 'array' ) {
+            echo ' style="';
+            $firstDone = false;
+            foreach ( $field->style as $style => $value ) {
+                echo $firstDone ? ' ' : '';
+                echo sanitize_text_field( $style ) . ':' . sanitize_text_field( $value ) . ';';
+                $firstDone = true;
+            }
+            echo '"';
+        }
+    }
+    // Placeholder
+    if ( isset( $field->placeholder ) && $field->placeholder !== '' ) {
+        echo ' placeholder="' . sanitize_textarea_field( $field->placeholder ) . '"';
+    }
+    // Default (value)
+    if ( isset( $field->default ) && $field->default !== '' ) {
+        echo ' value="' . sanitize_text_field( $field->default ) . '"';
+    }
+    // Min
+    if ( isset( $field->min ) && $field->min !== '' ) {
+        echo ' min="' . sanitize_text_field( $field->min ) . '"';
+    }
+    // Max
+    if ( isset( $field->max ) && $field->max !== '' ) {
+        echo ' max="' . sanitize_text_field( $field->max ) . '"';
+    }
+}
+
+function sdnet_freeform_label ( $field ) {
+
 }
 
 function sdnet_freeform_getFormDetailFromSlug ( $slug ) {
