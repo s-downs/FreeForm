@@ -33,17 +33,17 @@ function sdnet_freeform_shortcode ( $attr, $content ) {
     foreach( $format as $field ) {
         $label = isset($field->label) && $field->label && $field->label !== '';
         if ( $label )
-            echo '<label><div>' . sanitize_text_field( $field->label ) . '</div>';
+            echo '<label>';
 
 
         if ( $field->type === 'input' ) {
-            if ( $label ) echo sanitize_text_field( $field->label );
+            if ( $label ) echo '<div>' . sanitize_text_field( $field->label ) . '</div>';
             echo '<input';
             sdnet_freeform_generic_attributes( $field );
             echo '>';
         }
         if ( $field->type === 'textarea' ) {
-            if ( $label ) echo sanitize_text_field( $field->label );
+            if ( $label ) echo '<div>' . sanitize_text_field( $field->label ) . '</div>';
             echo '<textarea';
             sdnet_freeform_generic_attributes( $field );
             echo '></textarea>';
